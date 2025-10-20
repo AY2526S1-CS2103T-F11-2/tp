@@ -83,16 +83,6 @@
       "headingKeywords": {}
     },
     {
-      "src": "SettingUp.md",
-      "title": "Setting up and getting started",
-      "headings": {
-        "setting-up-and-getting-started": "Setting up and getting started",
-        "setting-up-the-project-in-your-computer": "Setting up the project in your computer",
-        "before-writing-code": "Before writing code"
-      },
-      "headingKeywords": {}
-    },
-    {
       "src": "Testing.md",
       "title": "Testing guide",
       "headings": {
