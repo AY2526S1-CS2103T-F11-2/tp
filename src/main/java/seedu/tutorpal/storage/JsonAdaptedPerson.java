@@ -18,6 +18,7 @@ import seedu.tutorpal.model.person.PaymentHistory;
 import seedu.tutorpal.model.person.Person;
 import seedu.tutorpal.model.person.Phone;
 import seedu.tutorpal.model.person.Role;
+import seedu.tutorpal.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -74,6 +75,9 @@ class JsonAdaptedPerson {
         classes.addAll(source.getClasses().stream()
                 .map(JsonAdaptedClass::new)
                 .collect(Collectors.toList()));
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
         paymentHistory = new JsonAdaptedPaymentHistory(source.getPaymentHistory());
         isMarked = source.isMarked();
     }
@@ -89,6 +93,10 @@ class JsonAdaptedPerson {
             personClasses.add(classItem.toModelType());
         }
 
+        final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            personTags.add(tag.toModelType());
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -144,8 +152,9 @@ class JsonAdaptedPerson {
         final boolean modelIsMarked = (isMarked != null) ? isMarked : false;
 
         final Set<Class> modelClasses = new HashSet<>(personClasses);
+        final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelRole, modelAddress,
-                modelClasses, modelPaymentHistory, modelIsMarked);
+                modelClasses, modelTags, modelPaymentHistory, modelIsMarked);
     }
 
 }

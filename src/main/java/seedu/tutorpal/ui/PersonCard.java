@@ -87,5 +87,8 @@ public class PersonCard extends UiPart<Region> {
         } else {
             paymentStatus.getStyleClass().add("payment-unpaid");
         }
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }

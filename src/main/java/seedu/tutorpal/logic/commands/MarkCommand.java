@@ -58,6 +58,7 @@ public class MarkCommand extends Command {
                 personToMark.getRole(),
                 personToMark.getAddress(),
                 personToMark.getClasses(),
+                personToMark.getTags(),
                 personToMark.getPaymentHistory(),
                 true
         );
