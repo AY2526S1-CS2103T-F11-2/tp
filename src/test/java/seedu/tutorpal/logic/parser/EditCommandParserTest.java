@@ -1,5 +1,9 @@
 package seedu.tutorpal.logic.parser;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.tutorpal.commons.core.index.Index;
+import seedu.tutorpal.logic.Messages;
 import static seedu.tutorpal.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tutorpal.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.tutorpal.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
@@ -21,27 +25,22 @@ import static seedu.tutorpal.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.tutorpal.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.tutorpal.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.tutorpal.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
+import seedu.tutorpal.logic.commands.EditCommand;
+import seedu.tutorpal.logic.commands.EditCommand.EditPersonDescriptor;
 import static seedu.tutorpal.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.tutorpal.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.tutorpal.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tutorpal.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.tutorpal.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tutorpal.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.tutorpal.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.tutorpal.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.tutorpal.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-
-import org.junit.jupiter.api.Test;
-
-import seedu.tutorpal.commons.core.index.Index;
-import seedu.tutorpal.logic.Messages;
-import seedu.tutorpal.logic.commands.EditCommand;
-import seedu.tutorpal.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.tutorpal.model.person.Address;
 import seedu.tutorpal.model.person.Email;
 import seedu.tutorpal.model.person.Name;
 import seedu.tutorpal.model.person.Phone;
 import seedu.tutorpal.testutil.EditPersonDescriptorBuilder;
+import static seedu.tutorpal.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.tutorpal.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.tutorpal.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 public class EditCommandParserTest {
 
