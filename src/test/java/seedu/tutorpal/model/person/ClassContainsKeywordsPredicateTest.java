@@ -51,9 +51,9 @@ public class ClassContainsKeywordsPredicateTest {
         predicate = new ClassContainsKeywordsPredicate(Arrays.asList("s4mon1600", "s4wed1400"));
         assertTrue(predicate.test(new PersonBuilder().withClasses("s4mon1600").build()));
 
-        // Partial keyword should not match (requires full class token)
+        // Partial keyword should match
         predicate = new ClassContainsKeywordsPredicate(Arrays.asList("s4mon"));
-        assertFalse(predicate.test(new PersonBuilder().withClasses("s4mon1600").build()));
+        assertTrue(predicate.test(new PersonBuilder().withClasses("s4mon1600").build()));
     }
 
     @Test

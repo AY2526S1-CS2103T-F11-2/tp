@@ -60,27 +60,56 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        // Assert that only one filter is applied at a time
+        assert classPredicate == null || tutorPredicate == null
+                : "Only one filter can be applied at a time";
         if (classPredicate == null && tutorPredicate == null) {
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(MESSAGE_SUCCESS);
+            return executeListAll(model);
         } else if (classPredicate != null) {
-            model.updateFilteredPersonList(classPredicate);
-            String joinedKeywords = String.join(", ", classPredicate.getKeywords());
-            return new CommandResult(
-                    String.format(MESSAGE_SUCCESS_FILTERED_CLASS, joinedKeywords) + "\n"
-                    + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+            return executeListClass(model);
         } else {
             // Handle tutor predicate
-            List<String> tutorClasses = tutorPredicate.findTutorClasses(model.getAddressBook().getPersonList());
-            tutorPredicate.setTutorClassKeywords(tutorClasses);
-            model.updateFilteredPersonList(tutorPredicate);
-            String joinedTutorNames = String.join(", ", tutorPredicate.getTutorNames());
-            return new CommandResult(
-                    String.format(MESSAGE_SUCCESS_FILTERED_TUTOR, joinedTutorNames) + "\n"
-                    + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+            return executeListTutor(model);
         }
     }
 
+    /**
+     * Executes the command to list all students.
+     * @param model The model containing address book data.
+     * @return a CommandResult with success message including class keyword.
+     */
+    private CommandResult executeListAll(Model model) {
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    /**
+     * Executes the command to list students filtered by class.
+     * @param model The model containing address book data.
+     * @return a CommandResult with success message including class keyword.
+     */
+    private CommandResult executeListClass(Model model) {
+        model.updateFilteredPersonList(classPredicate);
+        String joinedKeywords = String.join(", ", classPredicate.getKeywords());
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS_FILTERED_CLASS, joinedKeywords) + "\n"
+                + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
+
+    /**
+     * Executes the command to list students filtered by tutor.
+     * @param model The model containing address book data.
+     * @return a CommandResult with success message including class keyword.
+     */
+    private CommandResult executeListTutor(Model model) {
+        List<String> tutorClasses = tutorPredicate.findTutorClasses(model.getAddressBook().getPersonList());
+        tutorPredicate.setTutorClassKeywords(tutorClasses);
+        model.updateFilteredPersonList(tutorPredicate);
+        String joinedTutorNames = String.join(", ", tutorPredicate.getTutorNames());
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS_FILTERED_TUTOR, joinedTutorNames) + "\n"
+                + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

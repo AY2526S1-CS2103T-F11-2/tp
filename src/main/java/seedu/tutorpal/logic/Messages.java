@@ -18,6 +18,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_CONFLICTING_FILTERS =
+                "Cannot specify more than one filter in the same command. Please use only one filter at a time.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

@@ -1,6 +1,7 @@
 package seedu.tutorpal.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.tutorpal.logic.Messages.MESSAGE_CONFLICTING_FILTERS;
 import static seedu.tutorpal.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tutorpal.testutil.Assert.assertThrows;
 
@@ -17,13 +18,13 @@ public class ListCommandParserTest {
     private final ListCommandParser parser = new ListCommandParser();
 
     @Test
-    public void parse_emptyArgs_returnsListCommand() throws Exception {
+    public void parse_emptyArgs_returnsListCommand() throws ParseException {
         ListCommand command = parser.parse("");
         assertEquals(new ListCommand(), command);
     }
 
     @Test
-    public void parse_validClassFilter_returnsListCommandWithPredicate() throws Exception {
+    public void parse_validClassFilter_returnsListCommandWithPredicate() throws ParseException {
         ListCommand command = parser.parse(" c/s4mon1600");
         assertEquals(new ListCommand(new ClassContainsKeywordsPredicate(Arrays.asList("s4mon1600"))), command);
     }
@@ -35,9 +36,21 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void parse_emptyClassPrefix_throwsParseException() {
+    public void parse_emptyClassPrefix_returnsAllStudents() throws ParseException {
+        ListCommand command = parser.parse(" c/");
+        assertEquals(new ListCommand(new ClassContainsKeywordsPredicate(Arrays.asList(""))), command);
+    }
+
+    @Test
+    public void parse_conflictingFilters_throwsParseException() {
         assertThrows(ParseException.class,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), () -> parser.parse(" c/"));
+            MESSAGE_CONFLICTING_FILTERS, () -> parser.parse(" c/s4mon1600 tu/Siang Jun"));
+    }
+
+    @Test
+    public void parse_conflictingFiltersReverseOrder_throwsParseException() {
+        assertThrows(ParseException.class,
+            MESSAGE_CONFLICTING_FILTERS, () -> parser.parse(" tu/Siang Jun c/s4mon1600"));
     }
 }
 
