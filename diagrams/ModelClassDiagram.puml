@@ -15,6 +15,7 @@ Class UserPrefs
 Class UniquePersonList
 Class Person
 Class Address
+Class Class
 Class Email
 Class Name
 Class Phone
