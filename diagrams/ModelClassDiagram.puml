@@ -14,13 +14,17 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
+Class Student
+Class Tutor
 Class Address
 Class Class
 Class Email
 Class Name
 Class Phone
 Class Role
-Class Tag
+Class JoinDate
+Class PaymentHistory
+Class AttendanceHistory
 
 Class I #FFFFFF
 }
@@ -45,6 +49,13 @@ Person *--> Email
 Person *--> Address
 Person *--> Role
 Person *--> "*" Class
+Person *--> JoinDate
+Person *--> PaymentHistory
+
+Student -up-|> Person
+Tutor -up-|> Person
+
+Student *--> AttendanceHistory
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
