@@ -448,20 +448,28 @@ Extensions
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, macOS, and major Unix-like systems (e.g., Linux).
 * **CLI (Command Line Interface)**: A text-based interface where users interact with the application by typing commands instead of using graphical buttons and menus
+* **GUI (Graphical User Interface)**: The visual interface built with JavaFX, comprising `MainWindow`, `CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, etc. Layouts are defined in FXML under `src/main/resources/view`.
 * **Student**: A person enrolled in the tuition centre who receives educational instruction. Their information includes contact details, class assignments, payment status, and academic records
 * **Tutor**: An educator employed by the tuition centre to teach students. Can be assigned to multiple classes
 * **Class Code**: A standardized identifier for classes in the format `sXdddHHMM` where:
   - `sX` represents the secondary level (s1-s5)
   - `ddd` represents the day of the week (mon, tue, wed, thu, fri)
   - `HHMM` represents the time in 24-hour format (e.g., s4mon1600 means Secondary 4, Monday, 4:00 PM)
-* **Payment Status**: The current state of a student's tuition fee payment. Can be `paid` (fees received), `unpaid` (fees due but not received), or `overdue` (fees past due date)
+* **Payment Status**: The current state of monthly payments. For students, this refers to tuition fees; for tutors, this refers to salaries. Can be `paid` (months up to current are paid), `unpaid` (current month not yet paid, earlier months paid), or `overdue` (there exists any unpaid month before the current month).
 * **Index**: A positive integer used to identify a specific entry in the currently displayed contact list. Used in commands like `delete` and `pay`
 * **Contact**: A record in TutorPal containing information about a student or tutor, including name, phone number, email, and address
 * **Parameter**: A value provided by the user as part of a command, prefixed with identifiers like `n/` (name), `p/` (phone), `e/` (email), `c/` (class)
 * **Role**: The classification of a contact as either a `student` or `tutor` in the system
 * **Command**: An instruction typed by the user to perform an action in TutorPal (e.g., `add`, `delete`, `list`, `find`, `pay`)
+* **ISO Week (ISO-8601)**: A week defined by the ISO-8601 standard. Used in attendance. Format: `WXX-yyyy` where `XX` is 01–53 and `yyyy` ≥ 2000. Note: not all years have week 53.
+* **Attendance Week**: The ISO week specified in `mark`/`unmark` commands (e.g., `w/W10-2024`).
+* **Join Date**: Date the person (student/tutor) joined. Format: `dd-MM-yyyy`, year ≥ 2000. Defaults to the current date of the local system if omitted on add.
+* **Join Week**: The ISO-8601 week derived from the Join Date. Attendance can only be marked/unmarked from the Join Week up to the current week (inclusive).
+* **Join Month**: The first billing month for payments. Format: `MM-yyyy`. Payment tracking starts from this month (inclusive).
+* **Current Month**: Determined by the local system date/time and timezone of the device running TutorPal; used for payment validation.
+* **Payment Record**: A stored entry representing the payment status for a specific month (`MM-yyyy`) associated with a student or tutor.
 
 --------------------------------------------------------------------------------------------------------------------
 
