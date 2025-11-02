@@ -25,6 +25,8 @@ Class Role
 Class JoinDate
 Class PaymentHistory
 Class AttendanceHistory
+Class MonthlyPayment
+Class WeeklyAttendance
 
 Class I #FFFFFF
 }
@@ -48,7 +50,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> Role
-Person *--> "*" Class
+Person *--> "1..*" Class
 Person *--> JoinDate
 Person *--> PaymentHistory
 
@@ -65,4 +67,6 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+PaymentHistory --> "*" MonthlyPayment
+AtttendanceHistory --> "*" WeeklyAttendance
 @enduml
