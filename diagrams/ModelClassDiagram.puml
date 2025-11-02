@@ -68,5 +68,5 @@ Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
 PaymentHistory --> "*" MonthlyPayment
-AtttendanceHistory --> "*" WeeklyAttendance
+AttendanceHistory --> "*" WeeklyAttendance
 @enduml
