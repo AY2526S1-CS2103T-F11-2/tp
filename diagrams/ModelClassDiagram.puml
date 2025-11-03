@@ -13,7 +13,7 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
+abstract Class Person
 Class Student
 Class Tutor
 Class Address
@@ -49,8 +49,6 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> Role
-Person *--> "1..*" Class
 Person *--> JoinDate
 Person *--> PaymentHistory
 
@@ -58,6 +56,9 @@ Student -up-|> Person
 Tutor -up-|> Person
 
 Student *--> AttendanceHistory
+
+Student *--> "1" Class : enrolledIn
+Tutor *--> "1..*" Class : teaches
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
