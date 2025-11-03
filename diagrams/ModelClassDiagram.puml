@@ -57,8 +57,8 @@ Tutor -up-|> Person
 
 Student *--> AttendanceHistory
 
-Student *--> "1" Class : enrolledIn
-Tutor *--> "1..*" Class : teaches
+Student --> "1" Class : enrolled in
+Tutor --> "1..*" Class : teaches
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
